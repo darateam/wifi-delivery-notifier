@@ -90,7 +90,7 @@ class TuningActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val result = ParamTuner.tune(
                 samples = samples,
-                members = members,
+                targets = members,
                 current = MatchParams.load(this@TuningActivity),
                 onProgress = { done, total ->
                     runOnUiThread { binding.txtResult.text = "계산 중... $done / $total" }

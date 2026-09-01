@@ -31,6 +31,9 @@ class LiveMonitorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLiveMonitorBinding
     private lateinit var scanner: WifiScanner
     private lateinit var store: MemberStore
+    private lateinit var pressure: PressureTracker
+    private lateinit var route: RouteScope
+    private var matchParams = MatchParams()
     private val handler = Handler(Looper.getMainLooper())
 
     private var scanCount = 0
@@ -53,7 +56,7 @@ class LiveMonitorActivity : AppCompatActivity() {
         setContentView(binding.root)
         scanner = WifiScanner(this)
         store = MemberStore.get(this)
-        params = MatchParams.load(this)
+        matchParams = MatchParams.load(this)
         pressure = PressureTracker(this)
         route = RouteScope(this)
         title = "라이브 매칭"
@@ -64,7 +67,7 @@ class LiveMonitorActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        params = MatchParams.load(this)
+        matchParams = MatchParams.load(this)
         pressure.start()
         handler.post(tick)
     }
@@ -88,8 +91,8 @@ class LiveMonitorActivity : AppCompatActivity() {
 
         val index = ApIndex.build(all)
         val pi = pressure.currentIndex()
-        val ranked = SignatureMatcher.rank(members, live, params, index, pi)
-        val decision = SignatureMatcher.decide(ranked, params)
+        val ranked = SignatureMatcher.rank(members, live, matchParams, index, pi)
+        val decision = SignatureMatcher.decide(ranked, matchParams)
 
         binding.txtVerdict.text = buildString {
             append(
@@ -102,14 +105,14 @@ class LiveMonitorActivity : AppCompatActivity() {
             append("  —  ${decision.reason}\n")
             val margin = (decision.best?.score ?: 0.0) - (decision.runnerUp?.score ?: 0.0)
             append("마진 %.3f (기준 %.2f) · 관측 AP %d개 · %d회 스캔".format(
-                margin, params.marginThreshold, live.size, scanCount
+                margin, matchParams.marginThreshold, live.size, scanCount
             ))
         }
 
         binding.txtHeader.text = "%-10s %6s %5s %5s %s".format("회원", "점수", "커버", "RSSI", "앵커")
         binding.txtRanking.text = ranked.take(12).joinToString("\n") { s ->
             val mark = when {
-                s.score >= params.scoreThreshold -> "▶"
+                s.score >= matchParams.scoreThreshold -> "▶"
                 else -> " "
             }
             "%s%-10s %6.3f %5.2f %5.2f  %s".format(
