@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">배송 알림</string>
+    <string name="collect_title">신호 수집</string>
+</resources>

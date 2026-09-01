@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="배송 완료 문구  ({name} = 고객명)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/inputDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="방문 예정 문구 (다음 순번 고객)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/inputAdvance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchAd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="광고 문구 포함" />
+
+        <EditText
+            android:id="@+id/inputAd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="광고 문구"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <EditText
+            android:id="@+id/inputOptOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="무료 수신거부 번호 (필수)"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="#666666"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="실제 발송 미리보기"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F2F2F2"
+            android:fontFamily="monospace"
+            android:padding="12dp"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="저장" />
+    </LinearLayout>
+</ScrollView>

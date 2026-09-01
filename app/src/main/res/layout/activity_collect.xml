@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/txtMember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="문앞에 선 상태로 수집을 시작하세요. 몸으로 신호를 가리지 않도록 방향을 바꿔가며 서 있으면 좋습니다."
+        android:textColor="#666666"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/txtProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="0 / 12 라운드"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtApCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="관측 AP 0개"
+        android:textColor="#666666" />
+
+    <Button
+        android:id="@+id/btnCollect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="수집 시작" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="서명 저장" />
+
+    <TextView
+        android:id="@+id/txtPreview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:fontFamily="monospace"
+        android:textSize="12sp" />
+</LinearLayout>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Wi-Fi 스캔 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 스캔 결과를 세대 식별(=위치 추정)에 쓰므로 neverForLocation 플래그를 쓰지 않는다 -->
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- 포그라운드 서비스 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 문자 발송 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <!-- 텔레메트리 전송 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- NFC 태그 -->
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
+
+    <!-- 기압계는 선택 — 없어도 동작한다 -->
+    <uses-feature android:name="android.hardware.sensor.barometer" android:required="false" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="false"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WifiDelivery">
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.CollectActivity"
+            android:exported="false"
+            android:label="@string/collect_title" />
+
+        <activity
+            android:name=".ui.SignatureDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.LiveMonitorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.LabelActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.TuningActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.DisambiguationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.ZoneListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.ZoneDeliveryActivity"
+            android:exported="false" />
+
+        <!--
+            태그를 대면 앱이 꺼져 있어도 이 화면이 뜬다.
+            그러려면 exported여야 한다. 태그 UID로 회원을 조회할 뿐
+            인텐트 엑스트라를 신뢰하지 않으며, 위치가 어긋나면 확인을 거친다.
+        -->
+        <activity
+            android:name=".ui.NfcActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+        </activity>
+
+        <activity
+            android:name=".ui.MessageSettingsActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".service.DetectionService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+
+        <receiver
+            android:name=".sms.SendSmsReceiver"
+            android:exported="false" />
+
+    </application>
+</manifest>

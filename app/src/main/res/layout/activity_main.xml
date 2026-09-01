@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="배송 알림"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchDetection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="운영 모드 (문앞 체류 감지)" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchAutoSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="확인 없이 자동 발송" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchTestMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="테스트 모드 (문자 발송 차단, 정답 수집)" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="대기 중"
+        android:textColor="#666666" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/inputDwell"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="체류 초"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/inputInterval"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="스캔 주기 초"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnSaveSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnRouteStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="배송 시작" />
+
+        <Button
+            android:id="@+id/btnSetBaseline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1층 기준 설정" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtContext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#666666"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btnNfc"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:text="NFC 배송"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/btnLiveMonitor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="라이브 매칭 확인" />
+
+    <Button
+        android:id="@+id/btnZones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="사무실 구역 관리" />
+
+    <Button
+        android:id="@+id/btnMessages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="문자 문구 설정" />
+
+    <Button
+        android:id="@+id/btnTuning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="알고리즘 업데이트" />
+
+    <Button
+        android:id="@+id/btnAddMember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="회원 추가" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listMembers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1" />
+</LinearLayout>

@@ -1,0 +1,43 @@
+name: Build APK
+
+# 컨테이너 환경에서는 dl.google.com / maven.google.com 이 막혀 있어
+# APK를 직접 뽑을 수 없다. 리포에 올리면 여기서 대신 빌드한다.
+# Actions 탭 > 실행 결과 > Artifacts 에서 APK를 받아 폰에 설치하면 된다.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build debug APK
+        run: |
+          gradle wrapper --gradle-version 8.7
+          ./gradlew assembleDebug --no-daemon \
+            -PingestEndpoint="${{ secrets.INGEST_ENDPOINT }}" \
+            -PingestApiKey="${{ secrets.INGEST_API_KEY }}" \
+            -PbssidSalt="${{ secrets.BSSID_SALT }}"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 14
